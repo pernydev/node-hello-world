@@ -13,6 +13,8 @@ const identityMessage = {
   }
 };
 
+console.log(identityMessage);
+
 socket.addEventListener("open", (event) => {
   console.log("opened:", event);
   socket.send(JSON.stringify(identityMessage));
