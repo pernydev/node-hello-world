@@ -1,4 +1,4 @@
-const socket = new WebSocket("ws://localhost:4000");
+const socket = new WebSocket("ws://172.17.0.1:4000");
 
 socket.addEventListener("open", (event) => {
   console.log("opened:", event);
