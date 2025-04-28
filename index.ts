@@ -1,33 +1,17 @@
-const socket = new WebSocket("ws://172.17.0.1:4000");
+import { Client, GatewayIntentBits } from "discord.js";
 
-const identityMessage = {
-  op: 2,
-  d: {
-    token: process.env.DISCORD_TOKEN,
-    intents: 513, 
-    properties: {
-      os: "linux", 
-      browser: "stable.dev",
-      device: "stable.dev" 
-    }
+const client = new Client({
+  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
+});
+
+client.once("ready", () => {
+  console.log(`Logged in as ${client.user?.tag}!`);
+});
+
+client.on("messageCreate", (message) => {
+  if (message.content.toLowerCase() === "ping") {
+    message.reply("pong");
   }
-};
-
-console.log(identityMessage);
-
-socket.addEventListener("open", (event) => {
-  console.log("opened:", event);
-  socket.send(JSON.stringify(identityMessage));
 });
 
-socket.addEventListener("message", (event) => {
-  console.log("recv:", event.data);
-});
-
-socket.addEventListener("close", (event) => {
-  console.log("closed:", event);
-});
-
-socket.addEventListener("error", (event) => {
-  console.error("error:", event);
-});
+client.login(process.env.DISCORD_TOKEN)
