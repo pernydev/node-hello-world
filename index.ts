@@ -1,3 +1,4 @@
+console.log("Environment Variables:", process.env);
 const socket = new WebSocket("ws://172.17.0.1:4000");
 
 const identityMessage = {
