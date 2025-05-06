@@ -9,7 +9,7 @@ client.once('ready', () => {
 });
 
 client.on('messageCreate', (message) => {
-  console.log("messageCreate")
+  console.log("messageCreate", message.content)
   if (message.content.toLowerCase() === 'ping') {
     message.reply('pong');
   }
